@@ -50,12 +50,12 @@ project(":desktop") {
 
 project(":core") {
     apply plugin: "java"
-
+    apply plugin: "scala"
 
     dependencies {
+        compile "org.scala-lang:scala-library:2.11.8"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        
+        compile project(":libgdx-commons")
     }
 }
 
