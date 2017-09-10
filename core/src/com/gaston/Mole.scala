@@ -22,7 +22,7 @@ class Mole extends ApplicationAdapter {
 	}
 
 	def update(delta: Float) {
-		player.update(delta)
+		player.update(delta, ground)
 	}
 
 	def renderWorld() {
