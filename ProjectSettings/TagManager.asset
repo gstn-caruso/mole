@@ -14,10 +14,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Suelo
+  - Plataformas
+  - Fondo
+  - Personajes
   - 
   - 
   - 
@@ -41,4 +41,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Suelo
+    uniqueID: 1973313509
+    locked: 0
+  - name: Plataformas
+    uniqueID: 3830660409
+    locked: 0
+  - name: Fondo
+    uniqueID: 433897833
+    locked: 0
+  - name: Personajes
+    uniqueID: 2859387845
     locked: 0
