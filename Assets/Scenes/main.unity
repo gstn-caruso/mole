@@ -151,6 +151,36 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 50386308622224804, guid: ba0a05807391e49cb8d4ebc56215a589,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 50386308622224804, guid: ba0a05807391e49cb8d4ebc56215a589,
+        type: 2}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50386308622224804, guid: ba0a05807391e49cb8d4ebc56215a589,
+        type: 2}
+      propertyPath: m_Mass
+      value: 1.8199999
+      objectReference: {fileID: 0}
+    - target: {fileID: 50386308622224804, guid: ba0a05807391e49cb8d4ebc56215a589,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61567659905142414, guid: ba0a05807391e49cb8d4ebc56215a589,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114418818911077494, guid: ba0a05807391e49cb8d4ebc56215a589,
+        type: 2}
+      propertyPath: jumpSpeed
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba0a05807391e49cb8d4ebc56215a589, type: 2}
   m_IsPrefabParent: 0
@@ -301,10 +331,6 @@ Prefab:
     - target: {fileID: 4354936994604092, guid: 66381de9a06214b1ba03f24197469d4b, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4354936994604092, guid: 66381de9a06214b1ba03f24197469d4b, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 18.751427
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66381de9a06214b1ba03f24197469d4b, type: 2}
