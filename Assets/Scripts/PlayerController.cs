@@ -3,36 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	public float velocidadX = 0.2f;
-	public float fuerzaDeSalto = 800f;
-	public Transform pie;
-	public float radioPie;
-	public LayerMask suelo;
-	public bool enSuelo;
-	public bool enLaContraparte;
+	public float VelocidadX = 0.2f;
+	public float FuerzaDeSalto = 800f;
+	public float DiferenciaDeAlturaEntreContrapartes = 39f;
+	public Transform Pie;
+	public float RadioPie;
+	public LayerMask Suelo;
+	public bool EnSuelo;
+	public bool EnLaContraparte;
 
-	void Update(){
-		enLaContraparte = transform.position.y <= -20;
+	private void Update(){
+		EnLaContraparte = transform.position.y <= -20f;
 
-		float inputX = Input.GetAxis("Horizontal");
-		float movimientoX = transform.position.x + (inputX * velocidadX);
+		var inputX = Input.GetAxis("Horizontal");
+		var movimientoX = transform.position.x + (inputX * VelocidadX);
 		transform.position = new Vector3(movimientoX, transform.position.y, 0);
 		if (inputX > 0) { transform.localScale = new Vector3(10, 10, 1); }
 		if (inputX < 0) { transform.localScale = new Vector3(-10, 10, 1); }
 
-		enSuelo = Physics2D.OverlapCircle(pie.position, radioPie, suelo);
-		if (enSuelo && Input.GetKeyDown(KeyCode.Space)) {
-			GetComponent<Rigidbody2D>().AddForce(new Vector2 (0, fuerzaDeSalto));
+		EnSuelo = Physics2D.OverlapCircle(Pie.position, RadioPie, Suelo);
+		if (EnSuelo && Input.GetKeyDown(KeyCode.Space)) {
+			GetComponent<Rigidbody2D>().AddForce(new Vector2 (0, FuerzaDeSalto));
 		}
 
-		if(Input.GetKeyDown(KeyCode.LeftShift)) {
-			float nuevoY;
-			if(!enLaContraparte) {
-				nuevoY = transform.position.y - 39f;
-			} else {
-				nuevoY = transform.position.y + 39f;
-			}
+		if (Input.GetKeyDown(KeyCode.LeftShift)) {
+			var multiplicadorContraparte = EnLaContraparte ? 1 : - 1;
+			var nuevoY = transform.position.y + (DiferenciaDeAlturaEntreContrapartes * multiplicadorContraparte);
 			transform.position = new Vector3(transform.position.x, nuevoY, 0);
 		}
-	}
+
+}
 }
