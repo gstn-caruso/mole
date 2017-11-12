@@ -11,11 +11,21 @@ public class PlayerController : MonoBehaviour {
 	public LayerMask Suelo;
 	public bool EnSuelo;
 	public bool EnLaContraparte;
+	private Animator _animator;
+
+	private void Start()
+	{
+		_animator = GetComponent<Animator>();
+	}
 
 	private void Update(){
 		EnLaContraparte = transform.position.y <= -20f;
 
 		var inputX = Input.GetAxis("Horizontal");
+		
+		var playerSpeed = Mathf.Abs(inputX);
+		_animator.SetFloat("Speed", playerSpeed);
+
 		var movimientoX = transform.position.x + (inputX * VelocidadX);
 		transform.position = new Vector3(movimientoX, transform.position.y, 0);
 		if (inputX > 0) { transform.localScale = new Vector3(10, 10, 1); }
