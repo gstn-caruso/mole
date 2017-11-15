@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour {
 	public Transform Pie;
 	public float RadioPie;
 	public LayerMask Suelo;
-	public bool EnSuelo;
 	public bool EnLaContraparte;
 	private Animator _animator;
 
@@ -31,10 +30,7 @@ public class PlayerController : MonoBehaviour {
 		if (inputX > 0) { transform.localScale = new Vector3(10, 10, 1); }
 		if (inputX < 0) { transform.localScale = new Vector3(-10, 10, 1); }
 
-		EnSuelo = Physics2D.OverlapCircle(Pie.position, RadioPie, Suelo);
-		if (EnSuelo && Input.GetKeyDown(KeyCode.Space)) {
-			GetComponent<Rigidbody2D>().AddForce(new Vector2 (0, FuerzaDeSalto));
-		}
+		if (EnSuelo() && Input.GetKeyDown(KeyCode.Space)) { Saltar(); }
 
 		if (Input.GetKeyDown(KeyCode.LeftShift)) {
 			var multiplicadorContraparte = EnLaContraparte ? 1 : - 1;
@@ -43,4 +39,20 @@ public class PlayerController : MonoBehaviour {
 		}
 
 }
+
+	private bool EnSuelo()
+	{
+		return Physics2D.OverlapCircle(Pie.position, RadioPie, Suelo);
+	}
+
+	public void Saltar()
+	{
+		if(EnSuelo()) { GetComponent<Rigidbody2D>().AddForce(new Vector2(0, FuerzaDeSalto)); }
+	}
+
+	public void RetrocesoPorDañoEnemigo(float posicionEnemigaEnX)
+	{
+		var lado = Mathf.Sign(posicionEnemigaEnX - transform.position.x);
+		GetComponent<Rigidbody2D>().AddForce(Vector2.left * lado * FuerzaDeSalto, ForceMode2D.Impulse);
+	}
 }
