@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour {
 			transform.position = new Vector3(transform.position.x, nuevoY, 0);
 		}
 
+		if (Input.GetKeyDown(KeyCode.LeftAlt))
+		{
+	 		_animator.SetTrigger("Atacando");
+		}
+
 }
 
 	private bool EnSuelo()
