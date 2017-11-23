@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	public float RadioPie;
 	public LayerMask Suelo;
 	public bool EnLaContraparte;
+	public bool Saltando;
 	private Animator _animator;
 
 	private void Start()
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void Update(){
 		EnLaContraparte = transform.position.y <= -20f;
+		Saltando = !EnSuelo();
 
 		var inputX = Input.GetAxis("Horizontal");
 		
@@ -33,9 +35,9 @@ public class PlayerController : MonoBehaviour {
 		if (EnSuelo() && Input.GetKeyDown(KeyCode.Space)) { Saltar(); }
 
 		if (Input.GetKeyDown(KeyCode.LeftShift)) {
-			var multiplicadorContraparte = EnLaContraparte ? 1 : - 1;
-			var nuevoY = transform.position.y + (DiferenciaDeAlturaEntreContrapartes * multiplicadorContraparte);
-			transform.position = new Vector3(transform.position.x, nuevoY, 0);
+//			var multiplicadorContraparte = EnLaContraparte ? 1 : - 1;
+//			var nuevoY = transform.position.y + (DiferenciaDeAlturaEntreContrapartes * multiplicadorContraparte);
+//			transform.position = new Vector3(transform.position.x, nuevoY, 0);
 		}
 
 		if (Input.GetKeyDown(KeyCode.LeftAlt))
@@ -52,7 +54,11 @@ public class PlayerController : MonoBehaviour {
 
 	public void Saltar()
 	{
-		if(EnSuelo()) { GetComponent<Rigidbody2D>().AddForce(new Vector2(0, FuerzaDeSalto)); }
+		if (EnSuelo() && !Saltando)
+		{
+			Saltando = true;
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(0, FuerzaDeSalto));
+		}
 	}
 
 	public void RetrocesoPorDañoEnemigo(float posicionEnemigaEnX)
