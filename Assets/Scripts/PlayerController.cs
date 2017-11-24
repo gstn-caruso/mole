@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public float FuerzaDeSalto = 800f;
 	public float DiferenciaDeAlturaEntreContrapartes = 39f;
 	public Transform Pie;
+	public BoxCollider2D AttackColider;
 	public float RadioPie;
 	public LayerMask Suelo;
 	public bool EnLaContraparte;
@@ -16,9 +17,14 @@ public class PlayerController : MonoBehaviour {
 	private void Start()
 	{
 		_animator = GetComponent<Animator>();
+		AttackColider.enabled = false;
 	}
 
-	private void Update(){
+	private void Update()
+	{
+		var stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+		var attacking = stateInfo.IsName("Player_attack");
+		
 		EnLaContraparte = transform.position.y <= -20f;
 		Saltando = !EnSuelo();
 
@@ -43,6 +49,13 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.LeftAlt))
 		{
 	 		_animator.SetTrigger("Atacando");
+		}
+
+		if (attacking)
+		{
+			var playbackTime = stateInfo.normalizedTime;
+			if (playbackTime > 0.1 && playbackTime < 0.9) AttackColider.enabled = true;
+			else AttackColider.enabled = false;
 		}
 
 }
