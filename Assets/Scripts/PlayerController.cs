@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void RetrocesoPorDañoEnemigo(float posicionEnemigaEnX)
 	{
+		Saltando = true;
 		var lado = Mathf.Sign(posicionEnemigaEnX - transform.position.x);
 		GetComponent<Rigidbody2D>().AddForce(Vector2.left * lado * FuerzaDeSalto, ForceMode2D.Impulse);
 	}
