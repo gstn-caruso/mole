@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour {
 	public LayerMask Suelo;
 	public bool EnLaContraparte;
 	public bool Saltando;
+	public int Vida;
 	private Animator _animator;
 
 	private void Start()
 	{
+		Vida = 100;
 		_animator = GetComponent<Animator>();
 		AttackColider.enabled = false;
 	}
@@ -74,10 +76,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void RetrocesoPorDañoEnemigo(float posicionEnemigaEnX)
+	public void RetrocesoPorDañoEnemigo(object[] args)
 	{
 		Saltando = true;
-		var lado = Mathf.Sign(posicionEnemigaEnX - transform.position.x);
-		GetComponent<Rigidbody2D>().AddForce(Vector2.left * lado * FuerzaDeSalto, ForceMode2D.Impulse);
+		Vida -= (int) args[1];
+		var lado = Mathf.Sign((float) args[0] - transform.position.x);
+		GetComponent<Rigidbody2D>().AddForce(Vector2.left * lado * 15f, ForceMode2D.Impulse);
 	}
 }

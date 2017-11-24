@@ -35,7 +35,13 @@ public class EnemyController : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.CompareTag("Player")) { other.gameObject.SendMessage("Saltar"); }
+		if (other.gameObject.CompareTag("Player"))
+		{
+			var args = new object[2];
+			args[0] = PosicionActualEnX();
+			args[1] = 10;
+			other.gameObject.SendMessage("RetrocesoPorDañoEnemigo", args);
+		}
 	}
 
 	private float PosicionActualEnX()
