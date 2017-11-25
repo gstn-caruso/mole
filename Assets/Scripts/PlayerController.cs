@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 	public bool Saltando;
 	public int Vida;
 	private Animator _animator;
+	public GameObject _barraDeVida;
 
 	private void Start()
 	{
@@ -82,5 +83,6 @@ public class PlayerController : MonoBehaviour {
 		Vida -= (int) args[1];
 		var lado = Mathf.Sign((float) args[0] - transform.position.x);
 		GetComponent<Rigidbody2D>().AddForce(Vector2.left * lado * 15f, ForceMode2D.Impulse);
+		_barraDeVida.SendMessage("RecibirDaño", (int) args[1]);
 	}
 }
