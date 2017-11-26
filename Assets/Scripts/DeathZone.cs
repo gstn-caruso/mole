@@ -11,7 +11,7 @@ public class DeathZone : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("Player")) {
-			SceneManager.LoadScene(2, LoadSceneMode.Single);
+			SceneManager.LoadScene(1, LoadSceneMode.Single);
 		}
 	}
 }

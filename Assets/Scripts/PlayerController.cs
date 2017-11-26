@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 	public float VelocidadX = 0.2f;
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void GameOver()
 	{
-		SceneManager.LoadScene(2, LoadSceneMode.Single);
+		SceneManager.LoadScene(1, LoadSceneMode.Single);
 	}
 
 	private bool EnSuelo()
@@ -82,6 +83,11 @@ public class PlayerController : MonoBehaviour {
 			Saltando = true;
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0, FuerzaDeSalto));
 		}
+	}
+
+	public void RestarVida(int cantidadDeVida)
+	{
+		Vida -= cantidadDeVida;
 	}
 
 	public void RetrocesoPorDañoEnemigo(object[] args)
