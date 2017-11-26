@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 	public float VelocidadX = 0.2f;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void Update()
 	{
+		if (Vida < 1) { GameOver(); }
 		var stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
 		var attacking = stateInfo.IsName("Player_attack");
 		
@@ -62,6 +64,11 @@ public class PlayerController : MonoBehaviour {
 		}
 
 }
+
+	private void GameOver()
+	{
+		SceneManager.LoadScene(2, LoadSceneMode.Single);
+	}
 
 	private bool EnSuelo()
 	{
