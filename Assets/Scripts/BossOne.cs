@@ -25,6 +25,8 @@ public class BossOne : MonoBehaviour
 
 	private void Update()
 	{
+		GetComponent<Renderer>().material.color = Color.white;
+			
 		transform.position = new Vector3(transform.position.x+Velocidad, transform.position.y, 0);
 		if (Velocidad < 0) { transform.localScale = new Vector3(-1, 1, 1); }
 		if (Velocidad > 0) { transform.localScale = new Vector3(1, 1, 1); }
@@ -36,7 +38,7 @@ public class BossOne : MonoBehaviour
 		}
 		
 		var random = Random.Range(0, PribabilidadDeAtaque) == 1;
-		var b = Vida < 40 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("boss_jumping") && random && !Saltando;
+		var b = Vida < 150 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("boss_jumping") && random && !Saltando;
 		_animator.SetBool("Atacando", b);
 	}
 
@@ -46,15 +48,13 @@ public class BossOne : MonoBehaviour
 		{
 			Vida -= 10;
 			var lado = Mathf.Sign(transform.position.x);
-			_rb.AddForce(Vector2.left * lado * 15f, ForceMode2D.Impulse);
-			_rb.AddForce(new Vector2(0, FuerzaDeSalto));
-
+			
 		}
 		else
 		{
 			if (other.CompareTag("limite"))
 			{
-				Velocidad *= -1f;
+				Velocidad *= -1.05f;
 			}
 		}
 	}

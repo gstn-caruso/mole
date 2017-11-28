@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public float FuerzaDeSalto = 800f;
 	public float DiferenciaDeAlturaEntreContrapartes = 39f;
 	public Transform Pie;
-	public BoxCollider2D AttackColider;
+	public GameObject ataque;
 	public float RadioPie;
 	public LayerMask Suelo;
 	public bool EnLaContraparte;
@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour {
 	{
 		Vida = 100;
 		_animator = GetComponent<Animator>();
-		AttackColider.enabled = false;
 	}
 
 	private void Update()
@@ -60,8 +59,7 @@ public class PlayerController : MonoBehaviour {
 		if (attacking)
 		{
 			var playbackTime = stateInfo.normalizedTime;
-			if (playbackTime > 0.1 && playbackTime < 0.9) AttackColider.enabled = true;
-			else AttackColider.enabled = false;
+			ataque.SetActive(playbackTime > 0.1 && playbackTime < 0.9);
 		}
 
 }
