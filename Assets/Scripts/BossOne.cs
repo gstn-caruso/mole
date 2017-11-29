@@ -27,6 +27,7 @@ public class BossOne : MonoBehaviour
 
 	private void Update()
 	{
+		if(Vida != 200) { _barraDeVida.SetActive(true); }
 		if (Vida >= 0)
 		{
 			transform.position = new Vector3(transform.position.x + Velocidad, transform.position.y, 0);
@@ -63,7 +64,7 @@ public class BossOne : MonoBehaviour
 			Vida -= 10;
 			var lado = Mathf.Sign(transform.position.x);
 			_barraDeVida.SetActive(true);
-			_barraDeVida.SendMessage("RecibirDaño", 10);
+			_barraDeVida.SendMessage("RecibirDaño", 5);
 			
 		}
 		else
