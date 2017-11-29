@@ -13,6 +13,8 @@ public class BossOne : MonoBehaviour
 	public Transform Pie;
 	public float Velocidad = 0.1f;
 	private Rigidbody2D _rb;
+	public GameObject _barraDeVida;
+	public GameObject _gateLevelTwo;
 
 	private Animator _animator;
 
@@ -25,21 +27,33 @@ public class BossOne : MonoBehaviour
 
 	private void Update()
 	{
-		GetComponent<Renderer>().material.color = Color.white;
-			
-		transform.position = new Vector3(transform.position.x+Velocidad, transform.position.y, 0);
-		if (Velocidad < 0) { transform.localScale = new Vector3(-1, 1, 1); }
-		if (Velocidad > 0) { transform.localScale = new Vector3(1, 1, 1); }
-		
-		Saltando = !EnSuelo();
-		if (_animator.GetCurrentAnimatorStateInfo(0).IsName("boss_jumping"))
+		if (Vida >= 0)
 		{
-			Saltar();
+			transform.position = new Vector3(transform.position.x + Velocidad, transform.position.y, 0);
+			if (Velocidad < 0)
+			{
+				transform.localScale = new Vector3(-1, 1, 1);
+			}
+			if (Velocidad > 0)
+			{
+				transform.localScale = new Vector3(1, 1, 1);
+			}
+
+			Saltando = !EnSuelo();
+			if (_animator.GetCurrentAnimatorStateInfo(0).IsName("boss_jumping"))
+			{
+				Saltar();
+			}
+
+			var random = Random.Range(0, PribabilidadDeAtaque) == 1;
+			var b = Vida < 150 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("boss_jumping") && random && !Saltando;
+			_animator.SetBool("Atacando", b);
 		}
-		
-		var random = Random.Range(0, PribabilidadDeAtaque) == 1;
-		var b = Vida < 150 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("boss_jumping") && random && !Saltando;
-		_animator.SetBool("Atacando", b);
+		else
+		{
+			_animator.SetBool("Muerto", true);
+			_gateLevelTwo.SetActive(true);
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -48,6 +62,8 @@ public class BossOne : MonoBehaviour
 		{
 			Vida -= 10;
 			var lado = Mathf.Sign(transform.position.x);
+			_barraDeVida.SetActive(true);
+			_barraDeVida.SendMessage("RecibirDaño", 10);
 			
 		}
 		else
@@ -58,10 +74,15 @@ public class BossOne : MonoBehaviour
 			}
 		}
 	}
-	
-	public void RestarVida(int cantidadDeVida)
+	private void OnCollisionEnter2D(Collision2D other)
 	{
-		Vida -= cantidadDeVida;
+		if (other.gameObject.CompareTag("Player") && Vida >= 1)
+		{
+			var args = new object[2];
+			args[0] = transform.position.x;
+			args[1] = 10;
+			other.gameObject.SendMessage("RetrocesoPorDañoEnemigo", args);
+		}
 	}
 	
 	public void Saltar()
