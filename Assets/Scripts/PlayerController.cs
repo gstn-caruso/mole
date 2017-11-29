@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour {
 	public float DiferenciaDeAlturaEntreContrapartes = 39f;
 	public Transform Pie;
 	public GameObject ataque;
+	public AudioSource audioSource;
+	public AudioClip jumpSound;
+	public AudioClip punchSound;
+	public AudioClip atkSound;
 	public float RadioPie;
 	public LayerMask Suelo;
 	public bool EnLaContraparte;
@@ -54,6 +58,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.LeftAlt))
 		{
 	 		_animator.SetTrigger("Atacando");
+			audioSource.PlayOneShot(atkSound);
 		}
 
 		if (attacking)
@@ -79,6 +84,7 @@ public class PlayerController : MonoBehaviour {
 		if (EnSuelo() && !Saltando)
 		{
 			Saltando = true;
+			audioSource.PlayOneShot(jumpSound);
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0, FuerzaDeSalto));
 		}
 	}
@@ -90,6 +96,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void RetrocesoPorDañoEnemigo(object[] args)
 	{
+		audioSource.PlayOneShot(punchSound);
 		Saltando = true;
 		Vida -= (int) args[1];
 		var lado = Mathf.Sign((float) args[0] - transform.position.x);

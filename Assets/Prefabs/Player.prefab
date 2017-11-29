@@ -41,6 +41,22 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &1324917571325746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4460412328796478}
+  - component: {fileID: 82061977386443126}
+  m_Layer: 0
+  m_Name: Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1584739360824086
 GameObject:
@@ -91,8 +107,22 @@ Transform:
   m_Children:
   - {fileID: 4618145298078786}
   - {fileID: 4989239861844712}
+  - {fileID: 4460412328796478}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4460412328796478
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1324917571325746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4020265758281152}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4618145298078786
 Transform:
@@ -101,7 +131,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1279080946252556}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.148, y: 0, z: 0}
+  m_LocalPosition: {x: -0.196, y: 0, z: 0}
   m_LocalScale: {x: 0.16, y: -0.0037102227, z: 0.14840987}
   m_Children:
   - {fileID: 4957996742747264}
@@ -115,7 +145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1739865128920882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.216, y: -15.2, z: 0}
+  m_LocalPosition: {x: 1.158, y: -15.2, z: 0}
   m_LocalScale: {x: 0.7, y: 23.84, z: 1}
   m_Children: []
   m_Father: {fileID: 4618145298078786}
@@ -194,6 +224,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2259836, y: 31.42381}
   m_EdgeRadius: 0
+--- !u!82 &82061977386443126
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1324917571325746}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 1
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95179796709548218
 Animator:
   serializedVersion: 3
@@ -243,7 +353,11 @@ MonoBehaviour:
   FuerzaDeSalto: 1000
   DiferenciaDeAlturaEntreContrapartes: 39
   Pie: {fileID: 4989239861844712}
-  AttackColider: {fileID: 61564989291796088}
+  ataque: {fileID: 1279080946252556}
+  audioSource: {fileID: 82061977386443126}
+  jumpSound: {fileID: 8300000, guid: 653cbd1e121ba4068ad3c15297caf6e2, type: 3}
+  punchSound: {fileID: 8300000, guid: 19651d9f1c99d4d8194a74524b3c7b01, type: 3}
+  atkSound: {fileID: 8300000, guid: bb445ac791b46455dbb63d044ccadd7d, type: 3}
   RadioPie: 0.1
   Suelo:
     serializedVersion: 2
